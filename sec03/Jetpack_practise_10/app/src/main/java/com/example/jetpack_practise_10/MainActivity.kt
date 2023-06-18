@@ -22,9 +22,20 @@ class MainActivity : AppCompatActivity() {
             viewModel.plusLiveDataValue()
         }
 
-        viewModel.testMutableLiveData.observe(this,  {
-            findViewById<TextView>(R.id.textArea).text = viewModel.testMutableLiveData.value.toString()
+
+        // mutableLiveData 방식
+//        viewModel.testMutableLiveData.observe(this,  {
+//           // findViewById<TextView>(R.id.textArea).text = viewModel.testMutableLiveData.value.toString()
+//            findViewById<TextView>(R.id.textArea).text = it.toString()
+//        })
+
+        // LiveData 방식
+        // viewModel.testLiveData.value = 10 // LiveData 이기때문에 값 접근 불가 -> 비즈니스 로직을 뷰모델에게 철저히 분리
+        viewModel.testLiveData.observe(this, {
+            findViewById<TextView>(R.id.textArea).text = it.toString()
         })
+
+
 
     }
 }
